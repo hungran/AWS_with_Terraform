@@ -3,3 +3,5 @@ terraform.exe
 .terraform
 # key ignore
 *.sec
+# cred
+.aws
