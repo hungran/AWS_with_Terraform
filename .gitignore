@@ -1,6 +1,8 @@
 # Terraform
 terraform.exe
 .terraform
+*.tfstate
+*.tfstate.backup
 # key ignore
 *.sec
 # cred
