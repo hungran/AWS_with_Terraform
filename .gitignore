@@ -1,3 +1,5 @@
+# Terraform
 terraform.exe
+.terraform
 # key ignore
 *.sec
