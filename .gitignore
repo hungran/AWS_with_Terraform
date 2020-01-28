@@ -1,3 +1,3 @@
 terraform.exe
-acces_key.sec
-secret_acces_key.sec
+# key ignore
+*.sec
