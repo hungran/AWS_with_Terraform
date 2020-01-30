@@ -4,6 +4,8 @@ terraform.exe
 *.tfstate
 *.tfstate.backup
 # key ignore
+#vs
+.vs
 *.sec
 # Cred
 .aws
