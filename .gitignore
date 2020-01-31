@@ -9,3 +9,5 @@ terraform.exe
 *.sec
 # Cred
 .aws
+# .ssh
+.ssh
