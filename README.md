@@ -1,13 +1,24 @@
 # AWS_with_Terraform
 # Day2 [VPC](http://100daysofdevops.com/21-days-of-aws-using-terraform-day-2-building-aws-vpc-using-terraform/)
-- * Network Access Control List(NACL)
-- * Security Group
-- * Route Table
+- Security Group
+- Route Table
 
-- * Internet Gateways
-- * Subnets
-- * Custom Route Table
+- Internet Gateways
+- Subnets
+- Custom Route Table
 
+Các bước thực hành  Day 2:
+1. Tạo query / list all AZ có trong region
+2. Định nghĩa [variables.tf](https://github.com/hungran/AWS_with_Terraform/blob/master/variables.tf) để làm tham số, mục đích template cho các lần deploy sau
+3. Định nghĩa VPC, query đến cidr trong `variables.tf
+4. Định nghĩa Internet Gateway (igw) trỏ đến vpc vừa tạo
+5. Định nghĩa Public Route, có default route (0.0.0.0) trỏ đến igw
+6. Định nghĩa Privae Route, default route mặc định gắn với vpc
+7. Định nghĩa public subnet, query đến template varibales.tf
+8. Định nghĩa private subnet, query đến template varibales.tf
+9. Associate lần lượt public route và private route đến public subnet và private subnet
+10. Tạo Security group, tạo rule mở port 80, 22
+11. Import key pair được generate từ on prems
 - Result
     plan:
 
