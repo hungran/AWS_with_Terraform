@@ -82,14 +82,14 @@ resource "aws_route_table_association" "public_subnet_assoc" {
 //Associate route with Private Subnet
 resource "aws_route_table_association" "private_subnet_assoc" {
   count             = 2
-  route_table_id    = "${aws_route_table.private_route.id}"
+  route_table_id    = "${aws_default_route_table.private_route.id}"
   subnet_id         = "${aws_subnet.private_subnet.*.id[count.index]}"
-  depends_on        = ["aws_route_table.private_route", "aws_subnet.private_subnet"]
+  depends_on        = ["aws_default_route_table.private_route", "aws_subnet.private_subnet"]
 }
 
 //Security group
-resource "aws_security_group" "hung_sg_2020" {
-  name = "hung_sg_2020"
+resource "aws_security_group" "hung_sg" {
+  name = "hung_sg"
   vpc_id = "${aws_vpc.hung_vpc_2020.id}"
 }
 
@@ -97,7 +97,7 @@ resource "aws_security_group" "hung_sg_2020" {
 resource "aws_security_group_rule" "allow-ssh" {
   from_port         = 22
   protocol          = "tcp"
-  security_group_id = "${aws_security_group.hung_sg_2020}"
+  security_group_id = "${aws_security_group.hung_sg.id}"
   to_port           = 22
   type              = "ingress"
   cidr_blocks       = ["14.162.187.38/32"]  //my ip
@@ -107,7 +107,7 @@ resource "aws_security_group_rule" "allow-ssh" {
 resource "aws_security_group_rule" "allow-web" {
   from_port         = 80
   protocol          = "tcp"
-  security_group_id = "${aws_security_group.hung_sg_2020}"
+  security_group_id = "${aws_security_group.hung_sg.id}"
   to_port           = 80
   type              = "ingress"
   cidr_blocks       = ["14.162.187.38/32"]  //my ip
@@ -117,7 +117,7 @@ resource "aws_security_group_rule" "allow-web" {
 resource "aws_security_group_rule" "allow-outbound" {
   from_port         = 0
   protocol          = "-1"
-  security_group_id = "${aws_security_group.hung_sg_2020.id}"
+  security_group_id = "${aws_security_group.hung_sg.id}"
   to_port           = 0
   type              = "egress"
   cidr_blocks       = ["0.0.0.0/0"]
