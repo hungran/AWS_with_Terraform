@@ -11,3 +11,5 @@ terraform.exe
 .aws
 # .ssh
 .ssh
+# visual code
+.vs
