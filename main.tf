@@ -117,7 +117,7 @@ resource "aws_security_group_rule" "allow-web" {
 resource "aws_security_group_rule" "allow-outbound" {
   from_port         = 0
   protocol          = "-1"
-  security_group_id = "${aws_security_group.my-test-sg.id}"
+  security_group_id = "${aws_security_group.hung_sg_2020.id}"
   to_port           = 0
   type              = "egress"
   cidr_blocks       = ["0.0.0.0/0"]
