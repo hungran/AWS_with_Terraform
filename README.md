@@ -311,3 +311,15 @@ Các bước thực hành  Day 2:
                 Note: You didn't specify an "-out" parameter to save this plan, so Terraform
                 can't guarantee that exactly these actions will be performed if
                 "terraform apply" is subsequently run.
+    Outputs:                
+        
+        private_subnet1 = subnet-07b2d6a9d297ab447
+        private_subnet2 = subnet-0f5f29d9a2cfdfa47
+        public_subnet1 = subnet-0bbe259d793d59f70
+        public_subnet2 = subnet-0d03d20a00dd4a113
+        public_subnets = [
+                "subnet-0d03d20a00dd4a113",
+                "subnet-0bbe259d793d59f70",
+                ]
+        security_group = sg-0a97ec804fdfbf316
+        vpc_id = vpc-08174b3b6dd14acdd
