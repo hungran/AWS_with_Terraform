@@ -323,3 +323,4 @@ Các bước thực hành  Day 2:
                 ]
         security_group = sg-0a97ec804fdfbf316
         vpc_id = vpc-08174b3b6dd14acdd
+
