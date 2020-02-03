@@ -14,7 +14,7 @@ module "vpc" {
 
 module "ec2" {
   source         = "./ec2"
-//  instance_type  = "t2.micro"
+  instance_type  = "t2.micro"
   security_group = "${module.vpc.security_group}"
   subnets        = "${module.vpc.public_subnets}"
 }
