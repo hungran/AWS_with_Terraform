@@ -1,5 +1,10 @@
 # AWS_with_Terraform
-# Day2 [VPC](http://100daysofdevops.com/21-days-of-aws-using-terraform-day-2-building-aws-vpc-using-terraform/)
+Thực hành theo hướng dẫn của [blog]() 21 days of aws using by terraform 
+# Index
+- [VPC]()
+- [EC2]()
+
+## VPC
 - Security Group
 - Route Table
 
@@ -324,3 +329,13 @@ Các bước thực hành  Day 2:
         security_group = sg-0a97ec804fdfbf316
         vpc_id = vpc-08174b3b6dd14acdd
 
+## EC2
+- Tạo module VPC - Mục đính sử dụng làm template, điều chỉnh tham số khi có nhu cầu, tránh hardcode, gọi tham số giữa các module
+
+- Tạo module EC2, tạo `main.tf`, khai báo `variable.tf` **chú ý để trống các giá trị cần link với module khác** ví dụ: `subnet`, `security_group`
+- Tạo `public_key` bằng putty gen hoặc ssh-gent --> upload 
+- Tạo `bootstrap.tpl`
+
+- Tham số cụ thể của module EC2 như sau:
+    - [main.tf](./ec2/main.tf)
+    - [variables.tf](./ec2/variables.tf)
