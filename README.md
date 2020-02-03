@@ -29,9 +29,9 @@ Các bước thực hành  Day 2:
 10. Tạo **Security group**, tạo rule mở port 80, 22
 
 ## EC2
-- Tạo module VPC - Mục đính sử dụng làm template, điều chỉnh tham số khi có nhu cầu, tránh hardcode, gọi tham số giữa các module
+1. Tạo module VPC - Mục đính sử dụng làm template, điều chỉnh tham số khi có nhu cầu, tránh hardcode, gọi tham số giữa các module
 
-- Tạo module EC2, tạo `main.tf`, khai báo `variable.tf` **chú ý để trống các giá trị cần link với module khác** ví dụ: `subnet`, `security_group`
+2. Tạo module EC2, tạo `main.tf`, khai báo `variable.tf` **chú ý để trống các giá trị cần link với module khác** ví dụ: `subnet`, `security_group`
 - Tạo `public_key` bằng putty gen hoặc ssh-gent --> upload 
 - Tạo `bootstrap.tpl`
 
