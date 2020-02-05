@@ -1,4 +1,5 @@
-output "instance_id" {
+// Lấy ID của instance
+output "instance1_id" {
   value = "${element(aws_instance.hung_terraform_ubuntu.*.id, 1)}"
 }
 
