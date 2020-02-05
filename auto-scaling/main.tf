@@ -1,0 +1,56 @@
+provider "aws" {
+  shared_credentials_file = ".aws/Cred/accessKeys.csv"
+  region                  = "ap-southeast-1"
+}
+data "template_file" "bootstrap" {
+  template = "${file("./bootstrap.tpl")}"
+}
+resource "aws_launch_configuration" "hung_launch_config" {
+  name  = "hung_launch_config"
+  instance_type = "t2.micro"
+  image_id = "ami-0ee0b284267ea6cde" //ubuntu 16.04 LTS
+  key_name  = ["${var.key_name}"] //from ec2 module
+  user_data = "${(data.template_file.bootstrap.rendered)}"
+  security_groups = ["${var.security_group}"] // using security group from VPC module
+  enable_monitoring = true //for CPUUtilization metric policy
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+resource "aws_autoscaling_group" "hung_auto_scaling_group" {
+    name = "hung_auto_scaling_group"
+    max_size                  = 4
+    min_size                  = 1
+    health_check_grace_period = 300
+    health_check_type         = "ELB"
+    desired_capacity          = 2
+    launch_configuration      = "${aws_launch_configuration.hung_launch_config.name}"
+    vpc_zone_identifier       = "${var.subnet_id}"
+    target_group_arns         = ["${var.target_group_arns}"] // for application loadbalancer
+ 
+    tag {
+    key                 = "Name"
+    value               = "hung_auto_scaling_group"
+    propagate_at_launch = true
+    }
+}
+# resource "aws_autoscaling_policy" "increase-when-CPU-75" {
+#  name                   = "increase-when-CPU-75"
+#  scaling_adjustment     = 1
+#  adjustment_type        = "ChangeInCapacity"
+#  cooldown               = 300
+#  autoscaling_group_name = "${aws_autoscaling_group.hung_auto_scaling_group.name}"
+
+
+#  step_adjustment {
+#  metric_interval_lower_bound = 25.0
+#  metric_interval_upper_bound = 75.0
+#  }
+
+#  step_adjustment {
+#  scaling_adjustment          = 1
+#  metric_interval_lower_bound = 99.0
+#  metric_interval_upper_bound = 75.0
+#  }
+#
+}

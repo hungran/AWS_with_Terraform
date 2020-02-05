@@ -6,3 +6,6 @@ output "instance1_id" {
 output "instance2_id" {
   value = "${element(aws_instance.hung_terraform_ubuntu.*.id, 2)}"
 }
+output "key_name" {
+  value = "${aws_key_pair.public_key.key_name}"
+}

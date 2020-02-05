@@ -27,3 +27,10 @@ module "elb" {
   vpc_id          = "${module.vpc.vpc_id}"
   security_groups = "${module.vpc.security_group}"
 }
+
+module "auto_scaling" {
+  source           = "./auto_scaling"
+  subnet_id        = "${module.vpc.public_subnets}"
+  target_group_arn = "${module.elb.elb_target_group_arn}"
+  key_name         = "${module.ec2.key_name}"
+}
