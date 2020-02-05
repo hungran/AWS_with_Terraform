@@ -1,7 +1,9 @@
-Vũ Mạnh Hùng
-vmhung290791@gmail.com
-
 # AWS_with_Terraform
+
+Vũ Mạnh Hùng
+    
+- vmhung290791@gmail.com
+
 Thực hành theo hướng dẫn của [blog](https://github.com/100daysofdevops/21_days_of_aws_using_terraform/blob/master/README.md) 21 days of aws using by terraform 
 
 # Index
