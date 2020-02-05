@@ -4,13 +4,15 @@ Vũ Mạnh Hùng
     
 - vmhung290791@gmail.com
 
-Thực hành theo hướng dẫn của [blog](https://github.com/100daysofdevops/21_days_of_aws_using_terraform/blob/master/README.md) 21 days of aws using by terraform 
+Nguồn: 
+- Thực hành theo hướng dẫn của [blog](https://github.com/100daysofdevops/21_days_of_aws_using_terraform/blob/master/README.md) 21 days of aws using by terraform 
+- Tham khảo phần auto-scaling theo metric CPU từ [Link](https://github.com/cloudposse/terraform-aws-ec2-autoscale-group/blob/master/variables.tf)
 
 # Index
 - [VPC](#VPC)
 - [EC2](#EC2)
 - [ELB](#ELB)
-
+- [Auto-Scaling](#Auto-Scaling)
 ## VPC
 - Security Group
 - Route Table
@@ -68,3 +70,5 @@ Các bước thực hành  Day 2:
     - [main.tf](./elb/main.tf)
     - [variables.tf](./elb/variables.tf)
     - [output.tf](./elb/output.tf)
+
+# Auto-Scaling
