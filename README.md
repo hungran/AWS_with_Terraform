@@ -7,6 +7,7 @@ Thực hành theo hướng dẫn của [blog](https://github.com/100daysofdevops
 # Index
 - [VPC](#VPC)
 - [EC2](#EC2)
+- [ELB](#ELB)
 
 ## VPC
 - Security Group
@@ -38,6 +39,30 @@ Các bước thực hành  Day 2:
 - Tạo `bootstrap.tpl`
 
 3. Tạo `EBS volume`, attach `ebs` đến `instance`
+
+4. Tạo Output `instance_id` lần lượt để attach vào bài lab elastic-loadbalancer
 - Tham số cụ thể của module EC2 như sau:
     - [main.tf](./ec2/main.tf)
     - [variables.tf](./ec2/variables.tf)
+
+## ELB
+1. Tạo Target Group 
+2. Attach Target Group vào từng instance 
+3. Tao loadbalancer
+    - Chọn đến security group đã tạo ở `module vpc`
+    - subnet trỏ đến 2 public_subnet đã tạo ở `module vpc`
+    - chọn `ip_address_type` là ipv4
+    - `load_balancer_tyep` là application
+4. tạo `load_balancer_listener` 
+    - Trỏ đến load balancer vừa tạo ở trên qua `arn`:
+            
+            load_balancer_arn = "${aws_lb.hung_lb.arn}"
+    - Port & Protocol
+    - default_action là `forward` và trỏ đến `target_group_arn`
+            
+            target_group_arn = "${aws_lb_target_group.hung-target-group.arn}"
+
+5. Tham số 
+    - [main.tf](./elb/main.tf)
+    - [variables.tf](./elb/variables.tf)
+    - [output.tf](./elb/output.tf)
