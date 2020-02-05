@@ -20,10 +20,10 @@ module "ec2" {
 }
 module "elb" {
   source = "./elb"
-  instance2_id = "${module.ec2.instance2_id}"
-  instance1_id = "${module.ec2.instance1_id}"
-  subnet1      = "${module.vpc.public_subnet1}"
-  subnet2      = "${module.vpc.public_subnet2}"
-  vpc_id = "${module.vpc.vpc_id}"
-  security_group = "${module.vpc.security_group}"
+  instance2_id    = "${module.ec2.instance2_id}"
+  instance1_id    = "${module.ec2.instance1_id}"
+  subnet1         = "${module.vpc.public_subnet1}"
+  subnet2         = "${module.vpc.public_subnet2}"
+  vpc_id          = "${module.vpc.vpc_id}"
+  security_groups = "${module.vpc.security_group}"
 }
