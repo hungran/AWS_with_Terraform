@@ -1,3 +1,4 @@
+//Dùng output để gọi giá trị sang module ec2
 output "public_subnets" {
   value = "${aws_subnet.public_subnet.*.id}"
 }

@@ -37,6 +37,7 @@ Các bước thực hành  Day 2:
 - Tạo `public_key` bằng **putty gen** hoặc **ssh-gent** --> upload 
 - Tạo `bootstrap.tpl`
 
+3. Tạo `EBS volume`, attach `ebs` đến `instance`
 - Tham số cụ thể của module EC2 như sau:
     - [main.tf](./ec2/main.tf)
     - [variables.tf](./ec2/variables.tf)
