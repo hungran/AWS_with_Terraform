@@ -1,12 +1,12 @@
 variable "vpc_id" {
   
 }
-variable "instance1_id" {
+/* variable "instance1_id" {
   
 }
 variable "instance2_id" {
   
-}
+} */
 
 variable "subnet1" {
   
@@ -14,10 +14,7 @@ variable "subnet1" {
 variable "subnet2" {
   
 }
-variable "security_group" {
-  
-}
-variable "target_group_arns" {
+variable "security_groups" {
   
 }
 
