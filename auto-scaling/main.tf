@@ -9,7 +9,7 @@ resource "aws_launch_configuration" "hung_launch_config" {
   name  = "hung_launch_config"
   instance_type = "t2.micro"
   image_id = "ami-0ee0b284267ea6cde" //ubuntu 16.04 LTS
-  key_name  = ["${var.key_name}"] //from ec2 module
+  key_name  = "${var.key_name}" //from ec2 module
   user_data = "${(data.template_file.bootstrap.rendered)}"
   security_groups = ["${var.security_group}"] // using security group from VPC module
   enable_monitoring = true //for CPUUtilization metric policy
@@ -26,31 +26,64 @@ resource "aws_autoscaling_group" "hung_auto_scaling_group" {
     desired_capacity          = 2
     launch_configuration      = "${aws_launch_configuration.hung_launch_config.name}"
     vpc_zone_identifier       = "${var.subnet_id}"
-    target_group_arns         = ["${var.target_group_arns}"] // for application loadbalancer
- 
+    target_group_arns         = ["${var.target_group_arn}"] // for application loadbalancer
+    
     tag {
     key                 = "Name"
     value               = "hung_auto_scaling_group"
     propagate_at_launch = true
     }
 }
-# resource "aws_autoscaling_policy" "increase-when-CPU-75" {
-#  name                   = "increase-when-CPU-75"
-#  scaling_adjustment     = 1
-#  adjustment_type        = "ChangeInCapacity"
-#  cooldown               = 300
-#  autoscaling_group_name = "${aws_autoscaling_group.hung_auto_scaling_group.name}"
+resource "aws_autoscaling_policy" "scale_up" {
+  name                   = "scale_up"
+  scaling_adjustment     = 1
+  adjustment_type        = "ChangeInCapacity"
+  policy_type            = "SimpleScaling"
+  cooldown               = 300
+  autoscaling_group_name = "${aws_autoscaling_group.hung_auto_scaling_group.name}"
+}
 
+resource "aws_autoscaling_policy" "scale_down" {
+  name                   = "scal_down"
+  scaling_adjustment     = 1
+  adjustment_type        = "ChangeInCapacity"
+  policy_type            = "SimpleScaling"
+  cooldown               = 300
+  autoscaling_group_name = "${aws_autoscaling_group.hung_auto_scaling_group.name}"
+}
 
-#  step_adjustment {
-#  metric_interval_lower_bound = 25.0
-#  metric_interval_upper_bound = 75.0
-#  }
+resource "aws_cloudwatch_metric_alarm" "cpu_high" {
+  alarm_name          = "cpu_high"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 3 //3 time
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = 60   //60 s
+  statistic           = "Avarage"
+  threshold           = 90 // 90%
 
-#  step_adjustment {
-#  scaling_adjustment          = 1
-#  metric_interval_lower_bound = 99.0
-#  metric_interval_upper_bound = 75.0
-#  }
-#
+  dimensions = {
+    AutoScalingGroupName = "${aws_autoscaling_group.hung_auto_scaling_group.name}"
+  }
+
+  alarm_description = "Scale up if CPU utilization is above 90% for 60 seconds"
+  alarm_actions     = ["${aws_autoscaling_policy.scale_up.arn}"]
+}
+
+resource "aws_cloudwatch_metric_alarm" "cpu_low" {
+  alarm_name          = "cpu_low"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = 3
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = 60
+  statistic           = "Avarage"
+  threshold           = 10
+
+  dimensions = {
+    AutoScalingGroupName = "${aws_autoscaling_group.hung_auto_scaling_group.name}"
+  }
+
+  alarm_description = "Scale down if CPU utilization is above 10% for 60 seconds"
+  alarm_actions     = ["${aws_autoscaling_policy.scale_down.arn}"]
 }
