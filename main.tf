@@ -35,5 +35,5 @@ module "auto-scaling" {
   key_name         = "${module.ec2.key_name}"
   security_group   = "${module.vpc.security_group}"
 /*  subnet1         = "${module.vpc.public_subnet1}"
-  subnet2         = "${module.vpc.public_subnet2}" */
-}
+  subnet2         = "${module.vpc.public_subnet2}"
+} */
