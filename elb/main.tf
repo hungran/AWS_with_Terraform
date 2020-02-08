@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_lb_target_group" "hung-target-group" {
     health_check {
-        interval            = 10
+        interval            = 30
         path                = "/"
         protocol            = "HTTP"
         timeout             = 5
