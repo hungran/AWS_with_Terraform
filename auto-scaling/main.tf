@@ -59,7 +59,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
   period              = 60   //60 s
-  statistic           = "Avarage"
+  statistic           = "Average"
   threshold           = 90 // 90%
 
   dimensions = {
@@ -77,7 +77,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_low" {
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
   period              = 60
-  statistic           = "Avarage"
+  statistic           = "Average"
   threshold           = 10
 
   dimensions = {
