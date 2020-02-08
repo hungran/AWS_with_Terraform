@@ -49,7 +49,7 @@ Các bước thực hành  Day 2:
     - [main.tf](./ec2/main.tf)
     - [variables.tf](./ec2/variables.tf)
 
-## ELB
+## ELB - Need fix
 1. Tạo Target Group 
 2. Attach Target Group vào từng instance 
 3. Tao loadbalancer
