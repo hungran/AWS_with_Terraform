@@ -2,15 +2,19 @@ provider "aws" {
   shared_credentials_file = ".aws/Cred/accessKeys.csv"
   region                  = "ap-southeast-1"
 }
+//Query AZ available
 data "aws_availability_zones" "available" {}
+//Define key_pair
 resource "aws_key_pair" "public_key" {
   key_name   = "public_key"
   public_key = "${file(var.public_key)}"
 }
+//Bootstrap file
 data "template_file" "bootstrap" {
   template = "${file("./bootstrap.tpl")}"
 }
-resource "aws_instance" "hung_terraform_ubuntu" {
+/* Make comment for Autoscaling_Module 
+  resource "aws_instance" "hung_terraform_ubuntu" {
   count = 2
   ami   = "ami-0ee0b284267ea6cde" //ubuntu 16.04 LTS
   instance_type = "${var.instance_type}"
@@ -22,7 +26,8 @@ resource "aws_instance" "hung_terraform_ubuntu" {
     Name = "Canh-Rau-Den-${count.index +1}"
   }
 }
-resource "aws_ebs_volume" "hung-ebs" {
+
+/* resource "aws_ebs_volume" "hung-ebs" {
   count       = 2
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}" // query lần lượt và tạo 2 ebs lần lượt vào 2 Available AZ
   size = 1 // GiB
@@ -40,4 +45,4 @@ resource "aws_volume_attachment" "ebs-vol-attach" {
   volume_id = "${aws_ebs_volume.hung-ebs.*.id[count.index]}"
   depends_on = ["aws_ebs_volume.hung-ebs", "aws_instance.hung_terraform_ubuntu"]
   
-}
+} */
