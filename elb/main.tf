@@ -18,7 +18,7 @@ resource "aws_lb_target_group" "hung-target-group" {
     target_type = "instance"
     vpc_id      = "${var.vpc_id}"
 }
-/* resource "aws_lb_target_group_attachment" "hung_lb_target_group_attach_1" {
+resource "aws_lb_target_group_attachment" "hung_lb_target_group_attach_1" {
     target_group_arn    = "${aws_lb_target_group.hung-target-group.arn}"
     target_id           = "${var.instance1_id}"
     port                = 80
@@ -27,7 +27,7 @@ resource "aws_lb_target_group" "hung-target-group" {
     target_group_arn    = "${aws_lb_target_group.hung-target-group.arn}"
     target_id           = "${var.instance2_id}"
     port                = 80
- } */
+ }
  
 resource "aws_lb" "hung_lb" {
     name    = "hung-lb-by-terraform"
