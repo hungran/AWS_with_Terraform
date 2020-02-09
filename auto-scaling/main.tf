@@ -6,15 +6,16 @@ data "template_file" "bootstrap" {
   template = "${file("./bootstrap.tpl")}"
 }
 resource "aws_launch_configuration" "hung_launch_config" {
-  name  = "hung_launch_config"
+  name_prefix = "canh_rau_den-"
   instance_type = "t2.micro"
   image_id = "ami-0ee0b284267ea6cde" //ubuntu 16.04 LTS
   key_name  = "${var.key_name}" //from ec2 module
   user_data = "${(data.template_file.bootstrap.rendered)}"
   security_groups = ["${var.security_group}"] // using security group from VPC module
   enable_monitoring = true //for CPUUtilization metric policy
+  
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = true 
   }
 }
 resource "aws_autoscaling_group" "hung_auto_scaling_group" {
@@ -30,7 +31,7 @@ resource "aws_autoscaling_group" "hung_auto_scaling_group" {
     
     tag {
     key                 = "Name"
-    value               = "hung_auto_scaling_group"
+    value               = "Canh-Chua-Ca-Loc"
     propagate_at_launch = true
     }
 }
@@ -45,7 +46,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 
 resource "aws_autoscaling_policy" "scale_down" {
   name                   = "scal_down"
-  scaling_adjustment     = 1
+  scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
   policy_type            = "SimpleScaling"
   cooldown               = 300
