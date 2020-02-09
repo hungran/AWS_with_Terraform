@@ -12,6 +12,7 @@ output "key_name" {
   value = "${aws_key_pair.public_key.key_name}"
 }
 
-output "instance_id" {
+/*output "instance_id" {
   value = "${aws_instance.hung_terraform_ubuntu.*.id}"
 }
+*/
