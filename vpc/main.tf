@@ -101,7 +101,7 @@ resource "aws_security_group_rule" "allow-ssh" {
   security_group_id = "${aws_security_group.hung_sg.id}"
   to_port           = 22
   type              = "ingress"
-  cidr_blocks       = ["14.162.187.38/32", "27.72.144.48/32"]  //my ip
+  cidr_blocks       = ["14.162.187.38/32", "27.72.144.48/32", "192.168.0.0/16"]  //my ip
   
 }
 //allow web 80
@@ -111,7 +111,7 @@ resource "aws_security_group_rule" "allow-web" {
   security_group_id = "${aws_security_group.hung_sg.id}"
   to_port           = 80
   type              = "ingress"
-  cidr_blocks       = ["14.162.187.38/32", "27.72.144.48/32"]  //my ip
+  cidr_blocks       = ["14.162.187.38/32", "27.72.144.48/32", "192.168.0.0/16"]  //my ip
   
 }
 //allow outbound
