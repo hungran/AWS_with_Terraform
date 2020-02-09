@@ -31,7 +31,7 @@ Các bước thực hành  Day 2:
 7. Định nghĩa **public subnet**, query đến template varibales.tf
 8. Định nghĩa **private subnet**, query đến template varibales.tf
 9. Associate lần lượt public route và private route đến public subnet và private subnet
-10. Tạo **Security group**, tạo rule mở port 80, 22
+10. Tạo **Security group**, tạo rule mở port 80, 22. **Lưu ý, tạo rule trỏ đến cidr block của VPC để traffice giữa các service dùng chung SG có thể comunicate**
 
 ## EC2
 1. Tạo module VPC - Mục đính sử dụng làm template, điều chỉnh tham số khi có nhu cầu, tránh hardcode, gọi tham số giữa các module
@@ -49,7 +49,7 @@ Các bước thực hành  Day 2:
     - [main.tf](./ec2/main.tf)
     - [variables.tf](./ec2/variables.tf)
 
-## ELB
+## ELB -> Fixed
 1. Tạo Target Group 
 2. Attach Target Group vào từng instance 
 3. Tao loadbalancer
