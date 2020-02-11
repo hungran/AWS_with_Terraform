@@ -68,7 +68,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
   }
 
   alarm_description = "Scale up if CPU utilization is above 90% for 60 seconds"
-  alarm_actions     = ["${aws_autoscaling_policy.scale_up.arn}"]
+  alarm_actions     = ["${aws_autoscaling_policy.scale_up.arn}", "${var.sns_arn}"]
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpu_low" {
@@ -86,5 +86,5 @@ resource "aws_cloudwatch_metric_alarm" "cpu_low" {
   }
 
   alarm_description = "Scale down if CPU utilization is above 10% for 60 seconds"
-  alarm_actions     = ["${aws_autoscaling_policy.scale_down.arn}"]
+  alarm_actions     = ["${aws_autoscaling_policy.scale_down.arn}", "${var.sns_arn}"]
 }
