@@ -35,12 +35,26 @@ module "auto-scaling" {
   key_name         = "${module.ec2.key_name}"
   security_group   = "${module.vpc.security_group}"
   sns_arn          = "${module.sns.sns_arn}"
-/*  subnet1         = "${module.vpc.public_subnet1}"
+  /*  subnet1         = "${module.vpc.public_subnet1}"
   subnet2         = "${module.vpc.public_subnet2}" */
-} 
+}
 
 // Module SNS
 module "sns" {
-  source = "./sns"
+  source       = "./sns"
   alarms_email = "vmhung290791@gmail.com"
+}
+// Module rds
+module "rds" {
+  source          = "./rds"
+  db_instance     = "db.t2.micro"
+  private_subnet1 = "${module.vpc.private_subnet1}"
+  private_subnet2 = "${module.vpc.private_subnet2}"
+  vpc_id          = "${module.vpc.vpc_id}"
+}
+module "route53" {
+  source        = "./route53"
+  elb_dns_name  = "${module.elb.elb_dns_name}"
+  elb_zone_id   = "${module.elb.elb_zone_id}"
+
 }
