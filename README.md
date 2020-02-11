@@ -71,4 +71,6 @@ Các bước thực hành  Day 2:
     - [variables.tf](./elb/variables.tf)
     - [output.tf](./elb/output.tf)
 
-# Auto-Scaling
+## Auto-Scaling
+
+## SNS
