@@ -74,3 +74,7 @@ Các bước thực hành  Day 2:
 ## Auto-Scaling
 
 ## SNS
+
+## RDS
+
+## Route53
