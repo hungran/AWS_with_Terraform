@@ -45,7 +45,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 }
 
 resource "aws_autoscaling_policy" "scale_down" {
-  name                   = "scal_down"
+  name                   = "scale_down"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
   policy_type            = "SimpleScaling"
