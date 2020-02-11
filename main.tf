@@ -34,6 +34,13 @@ module "auto-scaling" {
   target_group_arn = "${module.elb.target_group_arn}"
   key_name         = "${module.ec2.key_name}"
   security_group   = "${module.vpc.security_group}"
+  sns_arn          = "${module.sns.sns_arn}"
 /*  subnet1         = "${module.vpc.public_subnet1}"
   subnet2         = "${module.vpc.public_subnet2}" */
 } 
+
+// Module SNS
+module "sns" {
+  source = "./sns"
+  alarms_email = "vmhung290791@gmail.com"
+}
