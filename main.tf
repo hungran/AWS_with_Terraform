@@ -53,8 +53,17 @@ module "rds" {
   vpc_id          = "${module.vpc.vpc_id}"
 }
 module "route53" {
-  source        = "./route53"
-  elb_dns_name  = "${module.elb.elb_dns_name}"
-  elb_zone_id   = "${module.elb.elb_zone_id}"
+  source       = "./route53"
+  elb_dns_name = "${module.elb.elb_dns_name}"
+  elb_zone_id  = "${module.elb.elb_zone_id}"
 
+}
+
+module "iam" {
+  source   = "./iam"
+  username = ["hungran2020", "hungran2021", "hungran2022"]
+}
+module "s3" {
+  source         = "./s3"
+  s3_bucket_name = "hung-bucket-private"
 }
