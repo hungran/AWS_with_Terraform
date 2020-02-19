@@ -25,7 +25,7 @@ resource "aws_db_subnet_group" "private_subnets" {
   name = "private_subnets"
   subnet_ids = ["${var.private_subnet1}","${var.private_subnet2}"]
 }
-resource "aws_security_group_rule" "in_bound" {
+resource "aws_security_group_rule" "allow_3306" {
   from_port = 3306
   protocol = "tcp"
   security_group_id = "${aws_security_group.hung-rds-sg.id}"
@@ -34,7 +34,7 @@ resource "aws_security_group_rule" "in_bound" {
   cidr_blocks = ["192.168.0.0/16"]
 
 }
-resource "aws_security_group_rule" "in_bound" {
+resource "aws_security_group_rule" "allow_22" {
   from_port = 22
   protocol = "tcp"
   security_group_id = "${aws_security_group.hung-rds-sg.id}"
