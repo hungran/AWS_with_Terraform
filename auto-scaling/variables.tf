@@ -13,6 +13,11 @@ variable "target_group_arn" {}
 variable "sns_arn" {
   
 }
+variable "max_size" {
+  
+}
+
+
 
 /* 
 variable "subnet1" {

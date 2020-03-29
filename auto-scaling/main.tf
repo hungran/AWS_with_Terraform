@@ -20,7 +20,7 @@ resource "aws_launch_configuration" "hung_launch_config" {
 }
 resource "aws_autoscaling_group" "hung_auto_scaling_group" {
     name = "hung_auto_scaling_group"
-    max_size                  = 4
+    max_size                  = "${var.max_size}"
     min_size                  = 1
     health_check_grace_period = 300
     health_check_type         = "ELB"
