@@ -16,7 +16,7 @@ resource "aws_vpc" "hung_vpc_2020" {
 }
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id             = "${aws_vpc.hung_vpc_2020.id}" 
+  vpc_id = "${aws_vpc.hung_vpc_2020.id}" 
 
   tags = {
     Name = "hung_test_igw"
@@ -47,7 +47,7 @@ resource "aws_default_route_table" "private_route" {
 
 //Create public subnet
 resource "aws_subnet" "public_subnet" {
-  count                   = 2
+  count                   = 2 #length(var.public_cidrs)
   cidr_block              = "${var.public_cidrs[count.index]}"
   vpc_id                  = "${aws_vpc.hung_vpc_2020.id}"
   map_public_ip_on_launch = true
